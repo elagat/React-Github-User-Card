@@ -19,7 +19,7 @@ class Card extends React.Component {
       })
       .then(githubUsers => {
         console.log('fetchUser', githubUsers)
-        this.setState({ users: githubUsers.name })
+        this.setState({ users: githubUsers })
       })
       .catch(error => {
         console.log(error);
@@ -29,7 +29,10 @@ class Card extends React.Component {
   render() {
     return (
       <div>
-        {this.state.users}
+        <h2>{this.state.users.name}</h2>
+        <p>{this.state.users.login}</p>
+        <p>{this.state.users.location}</p>
+        <img src={this.state.users.avatar_url}/>
       </div>
     );
   }
