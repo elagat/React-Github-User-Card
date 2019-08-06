@@ -1,4 +1,5 @@
 import React from 'react';
+import Followers from './Followers';
 
 class Card extends React.Component {
   constructor() {
@@ -33,6 +34,7 @@ class Card extends React.Component {
         <p>{this.state.users.login}</p>
         <p>{this.state.users.location}</p>
         <img src={this.state.users.avatar_url}/>
+        <Followers />
       </div>
     );
   }
