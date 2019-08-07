@@ -5,12 +5,14 @@ class Card extends React.Component {
   constructor() {
     super();
     this.state = {
-      users: []
+      users: [],
+      repos: []
     };
   };
 
   componentDidMount() {
     this.fetchUser();
+    this.fetchRepos();
   };
 
   fetchUser = () => {
@@ -27,6 +29,20 @@ class Card extends React.Component {
       });
   };
 
+  fetchRepos = () => {
+    fetch('https://api.github.com/users/elagat/repos')
+      .then(response => {
+        return response.json();
+      })
+      .then(repos => {
+        console.log('fetchRepos', repos)
+        this.setState({ repos: repos })
+      })
+      .catch(error => {
+        console.log(error);
+      })
+  }
+
   render() {
     return (
       <div>
@@ -35,6 +51,11 @@ class Card extends React.Component {
         <p>{this.state.users.location}</p>
         <img src={this.state.users.avatar_url}/>
         <Followers />
+        {this.state.repos.map(repo => {
+          return (
+            <a href={repo.html_url}><p>{repo.name}</p></a>
+          );
+        })}
       </div>
     );
   }

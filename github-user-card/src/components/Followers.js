@@ -17,9 +17,9 @@ class Followers extends React.Component {
       .then(response => {
         return response.json();
       })
-      .then(followers => {
-        console.log('followers', followers)
-        this.setState({ followers: followers })
+      .then(githubFollowers => {
+        console.log('followers', githubFollowers)
+        this.setState({ followers: githubFollowers })
       })
       .catch(error => {
         console.log(error);
@@ -31,9 +31,7 @@ class Followers extends React.Component {
       <div>
         Followers:{this.state.followers.map(follower => {
           return (
-            <>
-              <a href={follower.html_url}><p>{follower.login}</p></a>
-            </>
+            <a href={follower.html_url} key={follower}><p key={follower}>{follower.login}</p></a>
           );
         })}
       </div>
